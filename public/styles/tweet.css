@@ -8,27 +8,45 @@ article {
 
 article .tweetheader {
   background-color: #E0E0E0;
-  padding: 10px 5px 20px 5px;
+  padding: 10px 5px 50px 5px;
+  border-radius: 10px 10px 0 0;
 }
 
 article .tweetfooter {
   border-top: 1px solid grey;
+  font-size: smaller;
+  padding: 5px;
+}
+
+article .tweetfootericons{
+  float:right;
+}
+
+article .user {
+  font-weight: bolder;
+  padding-left: 65px;
+  font-size: larger;
 }
 
 article .username {
   float: right;
+  font-size: small;
+
+  /*text-align:right;*/
 }
 
 article .userimage {
   width:50px;
   height:50px;
   border-radius: 10px;
-}
-
-article .user {
-  font-weight: bolder;
+  float: left;
 }
 
 article .username {
   font-weight: normal;
 }
+
+article .tweetbody {
+padding: 30px 10px 30px 10px;
+}
+

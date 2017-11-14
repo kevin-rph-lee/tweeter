@@ -17,6 +17,8 @@
 
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
 
+    <link rel="stylesheet" href="/styles/tweet.css" type="text/css" />
+
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
 
@@ -37,21 +39,29 @@
 
     <!-- Page-specific (main) content here -->
     <main class="container">
-
       <section class="new-tweet">
        <h2>Compose Tweet</h2>
        <form action='/tweets' method=POST>
         <textarea name="text" placeholder="What are you humming about?"></textarea>
         <input type="submit" value="Tweet">
         <span class="counter">140</span>
-      </form>
-    </section>
-    <script>document.addEventListener("dblclick", function(event) {
-      console.log('X: ' + event.clientX);
-      console.log('Y: ' + event.clientY);
-            console.log(event);
-                        });
-    </script>
+       </form>
+      </section>
+      <section id='tweets'>
+        <article>
+          <header class= 'tweetheader'>
+            <div class= 'user'><img class='userimage' src="/images/ftl.png" alt="Mountain View">Hugh Jass<span class=username>@Hugh Jass</span></div>
+          </header>
+          <div class = 'tweetbody'>
+            body
+          </div>
+          <footer class = 'tweetfooter'>
+            footer
+
+          </footer>
+        </article>
+
+      </section>
 
     </main>
     <footer></footer>

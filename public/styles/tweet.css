@@ -8,7 +8,7 @@ article {
 
 article .tweetheader {
   background-color: #E0E0E0;
-  padding: 10px 5px 50px 5px;
+  padding: 10px 5px 10px 5px;
   border-radius: 10px 10px 0 0;
 }
 
@@ -20,6 +20,16 @@ article .tweetfooter {
 
 article .tweetfootericons{
   float:right;
+  opacity: 0;
+}
+
+article:hover .tweetfootericons {
+  float:right;
+  opacity: 1;
+}
+
+article .clearfix{
+  clear:both;
 }
 
 article .user {
@@ -28,9 +38,11 @@ article .user {
   font-size: larger;
 }
 
-article .username {
+article .handle {
   float: right;
   font-size: small;
+  font-style: normal;
+  font-weight: normal;
 
   /*text-align:right;*/
 }
@@ -40,10 +52,6 @@ article .userimage {
   height:50px;
   border-radius: 10px;
   float: left;
-}
-
-article .username {
-  font-weight: normal;
 }
 
 article .tweetbody {

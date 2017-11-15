@@ -27,6 +27,7 @@ article .tweetfootericons{
 article:hover .tweetfootericons {
   float:right;
   opacity: 1;
+  color:#00a087;
 }
 
 article:hover .user {

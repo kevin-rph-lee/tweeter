@@ -69,18 +69,28 @@ function createTweetElement(tweet) {
   const avatar = tweet.user.avatars.small;
   const dateCreated = tweet.created_at;
   const name = $('.hidden').text(tweet.user.name).html();
+  $('.hidden').text(tweet.content.text);
+  const body = $('.hidden').text(tweet.content.text).html();
   console.log(name);
+  $('.hidden').text(tweet.user.handle);
+  const handle = $('.hidden').text(tweet.user.handle).html();
   var $tweet = $('<article>');
   $($tweet).append(
     `<header class= 'tweetheader'>
       <img class='userimage' src="${avatar}">
-      <div class= 'user'>${name}</div>
+      <div class= 'user'>${name}<span class= 'handle'>${handle}</span></div>
       <div class= 'clearfix'></div>
     </header>
     <div class = 'tweetbody'>
+      ${body}
     </div>
     <footer class = 'tweetfooter'>
-      Created ${diffDays} days ago <span class = 'tweetfootericons'>Icons!</span>
+      Created ${diffDays} days ago
+      <span class = 'tweetfootericons'>
+        <i class="fa fa-flag" aria-hidden="true"></i>
+        <i class="fa fa-retweet" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+      </span>
     </footer>`);
 
   return $tweet;

@@ -1,7 +1,7 @@
 $( document ).ready(function() {
   let count = 140;
   console.log('js file is running..');
-  $( ".new-tweet textarea" ).keyup(function(e) {
+  $( ".new-tweet textarea" ).on("keyup input", function(e) {
     count = (140 - $(this).val().length);
     $(this).next().next().next().text(count);
     if (count < 0) {
@@ -9,7 +9,11 @@ $( document ).ready(function() {
     } else {
       $(this).next().next().next().css('color', 'black');
     }
-
+  })
 });
 
-});
+
+
+
+
+

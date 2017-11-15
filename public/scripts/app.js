@@ -23,7 +23,7 @@ var tweetData = [
   },
   {
     "user": {
-      "name": "Descartes",
+      "name": "<h1>hello</h1>",
       "avatars": {
         "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
         "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
@@ -37,7 +37,7 @@ var tweetData = [
   },
   {
     "user": {
-      "name": "Johann von Goethe",
+      "name": "<h1>Johann von Goethe</h1>",
       "avatars": {
         "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
         "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
@@ -59,25 +59,32 @@ function renderTweets(tweets) {
 }
 
 function createTweetElement(tweet) {
-  const name = tweet.user.name;
-  const handle = tweet.user.handle;
+  $('.hidden').text(tweet.user.name);
+
+  // Hours part from the timestamp
+  const oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+  const firstDate = new Date();
+  const secondDate = new Date(tweet.created_at);
+    const diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
   const avatar = tweet.user.avatars.small;
-  const body = tweet.content.text;
   const dateCreated = tweet.created_at;
+  const name = $('.hidden').text(tweet.user.name).html();
+  console.log(name);
   var $tweet = $('<article>');
   $($tweet).append(
     `<header class= 'tweetheader'>
       <img class='userimage' src="${avatar}">
-      <div class= 'user'>${name}<span class=handle>${handle}</span></div>
+      <div class= 'user'>${name}</div>
       <div class= 'clearfix'></div>
     </header>
     <div class = 'tweetbody'>
-    ${body}
     </div>
     <footer class = 'tweetfooter'>
-      Created at: ${dateCreated} <span class = 'tweetfootericons'>Icons!</span>
+      Created ${diffDays} days ago <span class = 'tweetfootericons'>Icons!</span>
     </footer>`);
+
   return $tweet;
+
 }
 
 renderTweets(tweetData);

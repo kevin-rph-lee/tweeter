@@ -18,6 +18,7 @@ article .tweetfooter {
   padding: 5px;
 }
 
+
 article .tweetfootericons{
   float:right;
   opacity: 0;
@@ -26,6 +27,14 @@ article .tweetfootericons{
 article:hover .tweetfootericons {
   float:right;
   opacity: 1;
+}
+
+article:hover .user {
+  color:black;
+}
+
+article:hover .tweetheader {
+  background-color: #808080  ;
 }
 
 article .clearfix{
@@ -58,3 +67,6 @@ article .tweetbody {
 padding: 30px 10px 30px 10px;
 }
 
+/*div.hidden {
+  display:none;
+}*/

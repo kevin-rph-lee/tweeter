@@ -20,7 +20,7 @@ function createTweetElement(tweet) {
   const oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
   const firstDate = new Date();
   const secondDate = new Date(tweet.created_at);
-    const diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+  const diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
   const avatar = tweet.user.avatars.small;
   const dateCreated = tweet.created_at;
   const name = $('.hidden').text(tweet.user.name).html();
@@ -54,19 +54,27 @@ $ ( function() {
   var $form = $('#submit');
   $form.on('submit', function (event) {
     event.preventDefault();
-    console.log($(this).serialize().length-5);
+    let count = Number($('.counter').text());
+    if(count == 140){
+      console.log('No text');
+      $('.error').text('No text');
+    } else if(Number($('.counter').text()) < 0){
+      $('.error').text('Post too long');
+    } else {
+      $('.error').empty();
       $.ajax({
-      url: '/tweets',
-      method: 'POST',
-      data: $(this).serialize(),
-      dataType: 'json',
-      success: function () {
-        console.log('success');
-
-      }
-    });
+        url: '/tweets',
+        method: 'POST',
+        data: $(this).serialize()
+      }).done(() => {
+        $('#tweets-container').empty();
+        loadTweets();
+        $('.counter').text('140');
+        $('textarea').val('');
+      })
+    }
   });
-} );
+});
 
 function loadTweets(){
   let tweets = {};

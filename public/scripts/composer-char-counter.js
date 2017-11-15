@@ -3,11 +3,11 @@ $( document ).ready(function() {
   console.log('js file is running..');
   $( ".new-tweet textarea" ).keyup(function(e) {
     count = (140 - $(this).val().length);
-    $(this).next().next().text(count);
+    $(this).next().next().next().text(count);
     if (count < 0) {
-      $(this).next().next().css('color', 'red');
+      $(this).next().next().next().css('color', 'red');
     } else {
-      $(this).next().next().css('color', 'black');
+      $(this).next().next().next().css('color', 'black');
     }
 
 });

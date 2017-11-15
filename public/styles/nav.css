@@ -21,3 +21,10 @@
   height: 80px;
   float: left;
 }
+
+#nav-bar .compose {
+  padding: 0 1px 0 1px 0;
+  height: 40px;
+  border: 1px solid white;
+  display: block;
+}

@@ -19,7 +19,7 @@ article .tweetfooter {
 }
 
 
-article .tweetfootericons{
+article .tweetfootericons {
   float:right;
   opacity: 0;
 }
@@ -38,7 +38,7 @@ article:hover .tweetheader {
   background-color: #808080  ;
 }
 
-article .clearfix{
+article .clearfix {
   clear:both;
 }
 
@@ -53,8 +53,6 @@ article .handle {
   font-size: small;
   font-style: normal;
   font-weight: normal;
-
-  /*text-align:right;*/
 }
 
 article .userimage {
@@ -65,9 +63,6 @@ article .userimage {
 }
 
 article .tweetbody {
-padding: 30px 10px 30px 10px;
+  padding: 30px 10px 30px 10px;
 }
 
-/*div.hidden {
-  display:none;
-}*/

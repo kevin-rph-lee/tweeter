@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <!-- Meta Information -->
     <title>Tweeter - Home Page</title>
@@ -7,20 +8,14 @@
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
 
-    <!-- Loading Robot Font -->
+    <!-- Loading external fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300i,700i" rel="stylesheet">
-
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-
 
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
-
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
-
     <link rel="stylesheet" href="/styles/tweet.css" type="text/css" />
 
     <!-- External JS -->
@@ -29,40 +24,32 @@
 
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
-
     <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
-
-
-
   </head>
 
   <body>
-
     <!-- Top nav bar (fixed) -->
     <nav id="nav-bar">
       <img class="nav-logo" class="logo" src="/images/bird.png" ">
       <span class="header">Tweeter</span>
-      <button class='compose'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-Compose</button>
+      <button class="compose"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Compose</button>
     </nav>
-
-    <!-- Page-specific (main) content here -->
     <main class="container">
+      <!-- New tweets box, initially set to be hidden via CSS -->
       <section class="new-tweet">
        <h2>Compose Tweet</h2>
-       <form id='submit' action='/tweets' method='POST'>
+       <form id="submit" action="/tweets" method="POST">
         <textarea name="text" placeholder="What are you humming about?"></textarea>
-        <input type="submit" id="submit-tweet"  name="Submit" value="Submit"><span class = 'error'></span>
+        <input type="submit" id="submit-tweet" name="Submit" value="Submit"><span class ="error"></span>
         <span class="counter">140</span>
        </form>
-
       </section>
-      <section id='tweets-container'>
-
+      <!-- Container which holds all tweets -->
+      <section id="tweets-container">
       </section>
-
     </main>
     <footer></footer>
-    <div class = 'hidden'></div>
+    <div class ="hidden"></div>
   </body>
+
 </html>

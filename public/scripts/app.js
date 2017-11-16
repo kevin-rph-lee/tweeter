@@ -15,14 +15,8 @@ function renderTweets(tweets) {
 
 function createTweetElement(tweet) {
   $('.hidden').text(tweet.user.name);
-
-  // Hours part from the timestamp
-  const oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-  const firstDate = new Date();
-  const secondDate = new Date(tweet.created_at);
-  const diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+  const date = moment(tweet.created_at).fromNow();
   const avatar = tweet.user.avatars.small;
-  const dateCreated = tweet.created_at;
   const name = $('.hidden').text(tweet.user.name).html();
   $('.hidden').text(tweet.content.text);
   const body = $('.hidden').text(tweet.content.text).html();
@@ -39,7 +33,7 @@ function createTweetElement(tweet) {
       ${body}
     </div>
     <footer class = 'tweetfooter'>
-      Created ${diffDays} days ago
+      Created ${date}
       <span class = 'tweetfootericons'>
         <i class="fa fa-flag" aria-hidden="true"></i>
         <i class="fa fa-retweet" aria-hidden="true"></i>

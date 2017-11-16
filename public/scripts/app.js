@@ -50,7 +50,7 @@ function createTweetElement(tweet) {
 }
 
 
-$ ( function() {
+$ (function() {
   var $form = $('#submit');
   $form.on('submit', function (event) {
     event.preventDefault();
@@ -87,13 +87,10 @@ function loadTweets(){
   });
 }
 
-// document.getElementByClass("compose").addEventListener("click", function(){
-//   console.log('click!');
-// });
+
 
 $('.compose').on('click', function(){
     $( ".new-tweet" ).slideToggle( "slow", function() {
-    // Animation complete.
   });
 });
 

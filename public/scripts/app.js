@@ -12,6 +12,7 @@ $(function(){
     $('.hidden').text(tweet.user.name);
     const date = moment(tweet.created_at).fromNow();
     const avatar = tweet.user.avatars.small;
+    const likes = tweet.likes;
     const $hidden = $('.hidden');
     //Putting text from user into the hidden div to convert to pure text, then pulling it out again t
     //This is to protect against cross site scripting
@@ -33,7 +34,7 @@ $(function(){
       <footer class = 'tweetfooter'>
         Created ${date}
         <span class = 'tweetfootericons'>
-          <span class = 'likeCounter'>0</span>
+          <span class = 'likeCounter'>${likes}</span>
           <i class='fa fa-heart' aria-hidden='true'></i>
           <i class='fa fa-flag' aria-hidden='true'></i>
           <i class='fa fa-retweet' aria-hidden='true'></i>

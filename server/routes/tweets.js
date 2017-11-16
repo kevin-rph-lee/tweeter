@@ -42,6 +42,11 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  tweetsRoutes.post("/id", function(req, res) {
+    console.log(req.body);
+  });
+
+
   return tweetsRoutes;
 
 }

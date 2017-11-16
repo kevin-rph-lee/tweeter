@@ -14,6 +14,7 @@ $(function(){
     const avatar = tweet.user.avatars.small;
     const likes = tweet.likes;
     const $hidden = $('.hidden');
+    const id = tweet._id;
     //Putting text from user into the hidden div to convert to pure text, then pulling it out again t
     //This is to protect against cross site scripting
     const name = $hidden.text(tweet.user.name).html();
@@ -38,6 +39,7 @@ $(function(){
           <i class='fa fa-heart' aria-hidden='true'></i>
           <i class='fa fa-flag' aria-hidden='true'></i>
           <i class='fa fa-retweet' aria-hidden='true'></i>
+          <span class = 'id'>${id}</div>
         </span>
       </footer>`);
     return $tweet;
@@ -99,6 +101,17 @@ $(function(){
       method: 'GET',
     }).done((tweets) => {
       renderTweets(tweets);
+      //REMEMBER THIS: EXAMPLE OF ASYNC FUNCTINOALITY!!!!!!!!!!!!!!!!
+      $('.tweetfootericons').on('click', function (event){
+        console.log($(event.target).siblings('.id').text());
+        $.ajax({
+          url: '/tweets/id',
+          method: 'POST',
+          data: {test:'hello'}
+        }).done(() => {
+          console.log('Post successful')
+        });
+      });
     });
   }
 
@@ -108,6 +121,12 @@ $(function(){
   $('.compose').on('click', function (){
     $('.new-tweet').slideToggle('slow');
   });
+
+  /**
+   * Toggling if the new tweet tab is open or closed
+   */
+
+
 
   loadTweets();
 

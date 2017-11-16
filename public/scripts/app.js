@@ -4,7 +4,6 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 $(function(){
-
   /**
    * Creates HTML element for a SINGLE tweet
    * @param  {obj} tweet a single tweet
@@ -46,39 +45,38 @@ $(function(){
   /**
    * Controls submitting a new tweet, including text countercreate
    */
-  $(function() {
-    var $form = $('#submit');
-    $form.on('submit', function (event) {
-      const $error = $('.error');
-      event.preventDefault();
-      let count = Number($('.counter').text());
-      if (count === 140){
-        $error.text('Empty tweets prohibited');
-      } else if (Number($('.counter').text()) < 0){
-        $error.text('Tweet above max length');
-      } else {
-        $('.error').empty();
+  $('#submit').on('submit', function (event) {
+    $submit = $(event.target)
+    const $error = $('.error');
+    event.preventDefault();
+    let count = Number($('.counter').text());
+    if (count === 140){
+      $error.text('Empty tweets prohibited');
+    } else if (Number($('.counter').text()) < 0){
+      $error.text('Tweet above max length');
+    } else {
+      $('.error').empty();
+      $.ajax({
+        url: '/tweets',
+        method: 'POST',
+        data: $(this).serialize()
+      }).done(() => {
+        //If the post req is successful, it does another get request and appeneds the new tweeet to the tweets container
         $.ajax({
           url: '/tweets',
-          method: 'POST',
-          data: $(this).serialize()
-        }).done(() => {
-          //If the post req is successful, it does another get request and appeneds the new tweeet to the tweets container
-          $.ajax({
-            url: '/tweets',
-            method: 'GET',
-            success: function (tweets) {
-              const $newTweet = createTweetElement(tweets[0]);
-              $('#tweets-container').prepend($newTweet);
-            }
-          });
-          //Clearing out the textbox area & counter for the next tweet
-          $('.counter').text('140');
-          $('textarea').val('');
+          method: 'GET',
+          success: function (tweets) {
+            const $newTweet = createTweetElement(tweets[0]);
+            $('#tweets-container').prepend($newTweet);
+          }
         });
-      }
-    });
+        //Clearing out the textbox area & counter for the next tweet
+        $('.counter').text('140');
+        $('textarea').val('');
+      });
+    }
   });
+
 
   /**
    * Iterates through an array of tweets and calls the createTweetElement function on each one

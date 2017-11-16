@@ -1,3 +1,8 @@
+/*
+ * Client-side JS logic goes here
+ * jQuery is already loaded
+ * Reminder: Use (and do all your DOM work in) jQuery's document ready function
+ */
 $(function(){
 
   /**
@@ -8,15 +13,23 @@ $(function(){
     $('.hidden').text(tweet.user.name);
     const date = moment(tweet.created_at).fromNow();
     const avatar = tweet.user.avatars.small;
+    const $hidden = $('.hidden');
+    //Putting text from user into the hidden div to convert to pure text, then pulling it out again t
+    //This is to protect against cross site scripting
+    const name = $hidden.text(tweet.user.name).html();
+    $hidden.text(tweet.content.text);
+    const body = $hidden.text(tweet.content.text).html();
+    $hidden.text(tweet.user.handle);
+    const handle = $hidden.text(tweet.user.handle).html();
     var $tweet = $('<article>');
     $($tweet).append(
       `<header class= 'tweetheader'>
         <img class='userimage' src='${avatar}'>
-        <div class= 'user'>${escape(tweet.user.name)}<span class= 'handle'>${escape(tweet.user.handle)})</span></div>
+        <div class= 'user'>${name}<span class= 'handle'>${handle}</span></div>
         <div class= 'clearfix'></div>
       </header>
       <div class = 'tweetbody'>
-        ${escape(tweet.content.text)}
+        ${body}
       </div>
       <footer class = 'tweetfooter'>
         Created ${date}
@@ -40,9 +53,9 @@ $(function(){
       event.preventDefault();
       let count = Number($('.counter').text());
       if (count === 140){
-        $error.text('Empty tweeet allowed');
+        $error.text('Empty tweets prohibited');
       } else if (Number($('.counter').text()) < 0){
-        $error.text('Tweet too long');
+        $error.text('Tweet above max length');
       } else {
         $('.error').empty();
         $.ajax({
@@ -55,7 +68,7 @@ $(function(){
             url: '/tweets',
             method: 'GET',
             success: function (tweets) {
-              const $newTweet = createTweetElement(tweets[tweets.length - 1]);
+              const $newTweet = createTweetElement(tweets[0]);
               $('#tweets-container').prepend($newTweet);
             }
           });
@@ -72,7 +85,7 @@ $(function(){
    * @param  {array} tweets an array of tweets
    */
   function renderTweets(tweets) {
-    for (let i = tweets.length-1; i >= 0; i --){
+    for (let i = 0; i < tweets.length; i ++){
       $(createTweetElement(tweets[i])).appendTo('#tweets-container');
     }
   }
@@ -97,7 +110,6 @@ $(function(){
     $('.new-tweet').slideToggle('slow');
   });
 
-  //loading the initial tweets
   loadTweets();
 
 });

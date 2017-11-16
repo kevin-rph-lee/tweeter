@@ -8,7 +8,7 @@ const bodyParser    = require("body-parser");
 const app           = express();
 
 const MongoClient = require("mongodb").MongoClient;
-const MONGODB_URI = "mongodb://localhost:27017/tweeter";
+const db = "mongodb://localhost:27017/tweeter";
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,7 +34,7 @@ app.use(express.static("public"));
 
 
 
-MongoClient.connect(MONGODB_URI, (err, db) => {
+MongoClient.connect(db, (err, db) => {
   if (err) {
     console.error(`Failed to connect: ${MONGODB_URI}`);
     throw err;

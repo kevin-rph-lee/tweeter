@@ -41,40 +41,6 @@ $(function(){
       </footer>`);
     return $tweet;
   }
-<<<<<<< HEAD
-=======
-}
-
-function createTweetElement(tweet) {
-  $('.hidden').text(tweet.user.name);
-  const date = moment(tweet.created_at).fromNow();
-  const avatar = tweet.user.avatars.small;
-  const name = $('.hidden').text(tweet.user.name).html();
-  $('.hidden').text(tweet.content.text);
-  const body = $('.hidden').text(tweet.content.text).html();
-  $('.hidden').text(tweet.user.handle);
-  const handle = $('.hidden').text(tweet.user.handle).html();
-  var $tweet = $('<article>');
-  $($tweet).append(
-    `<header class= 'tweetheader'>
-      <img class='userimage' src="${avatar}">
-      <div class= 'user'>${name}<span class= 'handle'>${handle}</span></div>
-      <div class= 'clearfix'></div>
-    </header>
-    <div class = 'tweetbody'>
-      ${body}
-    </div>
-    <footer class = 'tweetfooter'>
-      Created ${date}
-      <span class = 'tweetfootericons'>
-        <i class="fa fa-flag" aria-hidden="true"></i>
-        <i class="fa fa-retweet" aria-hidden="true"></i>
-        <i class="fa fa-heart" aria-hidden="true"></i>
-      </span>
-    </footer>`);
-  return $tweet;
-}
->>>>>>> master
 
   /**
    * Controls submitting a new tweet, including text countercreate

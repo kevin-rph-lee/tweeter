@@ -27,28 +27,8 @@ module.exports = function makeDataHelpers(db) {
     },
 
     likeTweet: function(id){
-      console.log('tweet liked! id: ' + id);
-      db.collection("tweets").updateOne({_id: new ObjectId('5a0e086e564ee7198d15b200')} , {$inc:{likes: +1}})
-
+      db.collection("tweets").updateOne({_id: new ObjectId(id)} , {$inc:{likes: 1}})
     }
   };
 }
 
-// {_id: new ObjectId('5a0e086e564ee7198d15b200')}
-
-
-
-
-
-
-
-
-
-
-    // likeTweet: function(id){
-    //   console.log('tweet liked! id: ' + id);
-    //   db.collection("tweets").find({_id: new ObjectId('5a0e086e564ee7198d15b200')}).toArray(function(err, result) {
-    //     console.log('Results!: ' + result[0]);
-
-    //   });
-    // }

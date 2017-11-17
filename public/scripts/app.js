@@ -35,11 +35,10 @@ $(function(){
       <footer class = 'tweetfooter'>
         Created ${date}
         <span class = 'tweetfootericons'>
-          <span class = 'likeCounter'>${likes}</span>
+          <span class = 'likeCounter' data-id = ${id}>${likes}</span>
           <i class='fa fa-heart likebutton' aria-hidden='true'></i>
           <i class='fa fa-flag' aria-hidden='true'></i>
           <i class='fa fa-retweet' aria-hidden='true'></i>
-          <span class = 'id'>${id}</div>
         </span>
       </footer>`);
     return $tweet;
@@ -71,6 +70,19 @@ $(function(){
           success: function (tweets) {
             const $newTweet = createTweetElement(tweets[0]);
             $('#tweets-container').prepend($newTweet);
+            //need to refactor somehow to make code DRY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            $('.likebutton').on('click', function (event){
+              const id = $(event.target).siblings('.likeCounter').data().id;
+              const $counter = ($(event.target).prev());
+              let likeCount =  $counter.text();
+              $.ajax({
+                url: '/tweets/' + id,
+                method: 'POST'
+              }).done(() => {
+                likeCount ++;
+                $counter.text(likeCount);
+              });
+            });
           }
         });
         //Clearing out the textbox area & counter for the next tweet
@@ -103,13 +115,15 @@ $(function(){
       renderTweets(tweets);
       //REMEMBER THIS: EXAMPLE OF ASYNC FUNCTINOALITY!!!!!!!!!!!!!!!!
       $('.likebutton').on('click', function (event){
-        const id = $(event.target).siblings('.id').text()
+        const id = $(event.target).siblings('.likeCounter').data().id;
+        const $counter = ($(event.target).prev());
+        let likeCount =  $counter.text();
         $.ajax({
           url: '/tweets/' + id,
-          method: 'POST',
-          data: {id: id}
+          method: 'POST'
         }).done(() => {
-
+          likeCount ++;
+          $counter.text(likeCount);
         });
       });
     });
@@ -125,7 +139,6 @@ $(function(){
   /**
    * Toggling if the new tweet tab is open or closed
    */
-
 
 
   loadTweets();

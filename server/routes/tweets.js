@@ -26,8 +26,8 @@ module.exports = function(DataHelpers) {
 
   tweetsRoutes.post("/:id", function(req, res) {
     console.log('post successful!');
-    console.log(req.body);
-    const id = req.body.id.trim().slice(0, req.body.id.length-2);
+    console.log(req.params);
+    const id = req.params.id;
     DataHelpers.likeTweet(id);
 
     res.sendStatus(200);
@@ -57,10 +57,6 @@ module.exports = function(DataHelpers) {
       }
     });
   });
-
-
-
-
   return tweetsRoutes;
 
 }

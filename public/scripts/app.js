@@ -36,7 +36,7 @@ $(function(){
         Created ${date}
         <span class = 'tweetfootericons'>
           <span class = 'likeCounter'>${likes}</span>
-          <i class='fa fa-heart' aria-hidden='true'></i>
+          <i class='fa fa-heart likebutton' aria-hidden='true'></i>
           <i class='fa fa-flag' aria-hidden='true'></i>
           <i class='fa fa-retweet' aria-hidden='true'></i>
           <span class = 'id'>${id}</div>
@@ -102,14 +102,14 @@ $(function(){
     }).done((tweets) => {
       renderTweets(tweets);
       //REMEMBER THIS: EXAMPLE OF ASYNC FUNCTINOALITY!!!!!!!!!!!!!!!!
-      $('.tweetfootericons').on('click', function (event){
-        console.log($(event.target).siblings('.id').text());
+      $('.likebutton').on('click', function (event){
+        const id = $(event.target).siblings('.id').text()
         $.ajax({
-          url: '/tweets/id',
+          url: '/tweets/' + id,
           method: 'POST',
-          data: {test:'hello'}
+          data: {id: id}
         }).done(() => {
-          console.log('Post successful')
+
         });
       });
     });

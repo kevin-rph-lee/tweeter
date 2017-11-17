@@ -5,6 +5,13 @@ const userHelper    = require("../lib/util/user-helper")
 const express       = require('express');
 const tweetsRoutes  = express.Router();
 
+
+
+const MongoClient = require("mongodb").MongoClient;
+const db = "mongodb://localhost:27017/tweeter";
+
+
+
 module.exports = function(DataHelpers) {
 
   tweetsRoutes.get("/", function(req, res) {
@@ -15,6 +22,15 @@ module.exports = function(DataHelpers) {
         res.json(tweets);
       }
     });
+  });
+
+  tweetsRoutes.post("/:id", function(req, res) {
+    console.log('post successful!');
+    console.log(req.body);
+    const id = req.body.id.trim().slice(0, req.body.id.length-2);
+    DataHelpers.likeTweet(id);
+
+    res.sendStatus(200);
   });
 
   tweetsRoutes.post("/", function(req, res) {
@@ -42,9 +58,7 @@ module.exports = function(DataHelpers) {
     });
   });
 
-  tweetsRoutes.post("/id", function(req, res) {
-    console.log(req.body);
-  });
+
 
 
   return tweetsRoutes;

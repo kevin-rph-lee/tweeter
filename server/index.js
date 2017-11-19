@@ -27,8 +27,4 @@ MongoClient.connect(db, (err, db) => {
     console.log("Example app listening on port " + PORT);
   });
 
-
-
-
-
 });

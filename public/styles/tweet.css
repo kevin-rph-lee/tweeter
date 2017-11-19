@@ -69,3 +69,7 @@ article .tweetbody {
 article .id {
   display: none;
 }
+
+article .likebutton:active {
+  color: red;
+}

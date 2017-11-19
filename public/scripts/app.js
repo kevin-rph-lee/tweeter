@@ -136,11 +136,6 @@ $(function(){
     $('.new-tweet').slideToggle('slow');
   });
 
-  /**
-   * Toggling if the new tweet tab is open or closed
-   */
-
-
   loadTweets();
 
 });

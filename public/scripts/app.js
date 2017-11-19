@@ -15,7 +15,7 @@ $(function(){
     const likes = tweet.likes;
     const $hidden = $('.hidden');
     const id = tweet._id;
-    //Putting text from user into the hidden div to convert to pure text, then pulling it out again t
+    //Putting text from user into the hidden div to convert to pure text, then pulling it out again
     //This is to protect against cross site scripting
     const name = $hidden.text(tweet.user.name).html();
     $hidden.text(tweet.content.text);
@@ -23,6 +23,7 @@ $(function(){
     $hidden.text(tweet.user.handle);
     const handle = $hidden.text(tweet.user.handle).html();
     var $tweet = $('<article>');
+    //Appending the new article to the DOM
     $($tweet).append(
       `<header class= 'tweetheader'>
         <img class='userimage' src='${avatar}'>
@@ -61,10 +62,10 @@ $(function(){
     let tweets = {};
     $.ajax({
       url: '/tweets',
-      method: 'GET',
+      method: 'GET'
     }).done((tweets) => {
       renderTweets(tweets);
-      //REMEMBER THIS: EXAMPLE OF ASYNC FUNCTINOALITY!!!!!!!!!!!!!!!!
+      //REMEMBER THIS FOR LATER: EXAMPLE OF ASYNC FUNCTIOALITY IN NODE!!!!!!!!!!!!!!!!
       $('.likebutton').on('click', function (event){
         const id = $(event.target).siblings('.likeCounter').data().id;
         const $counter = ($(event.target).prev());
@@ -90,16 +91,17 @@ $(function(){
 
 
   /**
-   * Controls submitting a new tweet, including text countercreate
+   * Controls submitting a new tweet to the DB, displaying it, along with how the like counter works.
    */
   $('#submit').on('submit', function (event) {
-    $submit = $(event.target)
+    $submit = $(event.target);
+    $counter = $('.counter');
     const $error = $('.error');
     event.preventDefault();
-    let count = Number($('.counter').text());
+    let count = Number($counter.text());
     if (count === 140){
       $error.text('Empty tweets prohibited');
-    } else if (Number($('.counter').text()) < 0){
+    } else if (Number($counter.text()) < 0){
       $error.text('Tweet above max length');
     } else {
       $('.error').empty();
@@ -117,6 +119,7 @@ $(function(){
             $('#tweets-container').prepend($newTweet);
             //need to refactor somehow to make code DRY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             $('.likebutton').on('click', function (event){
+              //Code that controls the like counter
               const id = $(event.target).siblings('.likeCounter').data().id;
               const $counter = ($(event.target).prev());
               let likeCount =  $counter.text();
@@ -131,14 +134,12 @@ $(function(){
           }
         });
         //Clearing out the textbox area & counter for the next tweet
-        $('.counter').text('140');
+        $counter.text('140');
         $('textarea').val('');
       });
     }
   });
 
   loadTweets();
-
-
 
 });

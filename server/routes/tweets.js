@@ -1,16 +1,10 @@
 "use strict";
 
-const userHelper    = require("../lib/util/user-helper")
-
+const userHelper    = require("../lib/util/user-helper");
 const express       = require('express');
 const tweetsRoutes  = express.Router();
-
-
-
 const MongoClient = require("mongodb").MongoClient;
 const db = "mongodb://localhost:27017/tweeter";
-
-
 
 module.exports = function(DataHelpers) {
 
@@ -25,8 +19,6 @@ module.exports = function(DataHelpers) {
   });
 
   tweetsRoutes.post("/:id", function(req, res) {
-    console.log('post successful!');
-    console.log(req.params);
     const id = req.params.id;
     DataHelpers.likeTweet(id);
 
@@ -59,4 +51,4 @@ module.exports = function(DataHelpers) {
   });
   return tweetsRoutes;
 
-}
+};

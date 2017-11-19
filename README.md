@@ -13,6 +13,9 @@ A fullstack application built with node and jquery. It allows users to add tweet
 - jquery 2.2.3 or above
 - normalize 4.1.1
 - Express
+- md5
+- mongodb
+- body-parser
 
 ## Getting Started
 

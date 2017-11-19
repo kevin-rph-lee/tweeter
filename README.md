@@ -4,7 +4,7 @@ A fullstack application built with node and jquery. It allows users to add tweet
 
 ## Final Product
 
-![SS1](/relative/path/to/img.jpg?raw=true "Optional Title")
+![SS1](https://raw.githubusercontent.com/kevin-rph-lee/tweeter/master/tweeter.PNG?raw=true "Screenshot")
 
 
 ## Dependencies

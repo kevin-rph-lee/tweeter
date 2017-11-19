@@ -45,6 +45,51 @@ $(function(){
   }
 
   /**
+   * Iterates through an array of tweets and calls the createTweetElement function on each one
+   * @param  {array} tweets an array of tweets
+   */
+  function renderTweets(tweets) {
+    for (let i = 0; i < tweets.length; i ++){
+      $(createTweetElement(tweets[i])).appendTo('#tweets-container');
+    }
+  }
+
+  /**
+   * Loading all tweets with a GET request, creating the diff HTML elements for them and displaying them
+   */
+  function loadTweets(){
+    let tweets = {};
+    $.ajax({
+      url: '/tweets',
+      method: 'GET',
+    }).done((tweets) => {
+      renderTweets(tweets);
+      //REMEMBER THIS: EXAMPLE OF ASYNC FUNCTINOALITY!!!!!!!!!!!!!!!!
+      $('.likebutton').on('click', function (event){
+        const id = $(event.target).siblings('.likeCounter').data().id;
+        const $counter = ($(event.target).prev());
+        let likeCount =  $counter.text();
+        $.ajax({
+          url: '/tweets/' + id,
+          method: 'POST'
+        }).done(() => {
+          likeCount ++;
+          $counter.text(likeCount);
+        });
+      });
+    });
+  }
+
+  /**
+   * Toggling if the new tweet tab is open or closed
+   */
+  $('.compose').on('click', function (){
+    $('.new-tweet').slideToggle('slow');
+    $('#submit-text').focus();
+  });
+
+
+  /**
    * Controls submitting a new tweet, including text countercreate
    */
   $('#submit').on('submit', function (event) {
@@ -92,50 +137,8 @@ $(function(){
     }
   });
 
-
-  /**
-   * Iterates through an array of tweets and calls the createTweetElement function on each one
-   * @param  {array} tweets an array of tweets
-   */
-  function renderTweets(tweets) {
-    for (let i = 0; i < tweets.length; i ++){
-      $(createTweetElement(tweets[i])).appendTo('#tweets-container');
-    }
-  }
-
-  /**
-   * Loading all tweets with a GET request, creating the diff HTML elements for them and displaying them
-   */
-  function loadTweets(){
-    let tweets = {};
-    $.ajax({
-      url: '/tweets',
-      method: 'GET',
-    }).done((tweets) => {
-      renderTweets(tweets);
-      //REMEMBER THIS: EXAMPLE OF ASYNC FUNCTINOALITY!!!!!!!!!!!!!!!!
-      $('.likebutton').on('click', function (event){
-        const id = $(event.target).siblings('.likeCounter').data().id;
-        const $counter = ($(event.target).prev());
-        let likeCount =  $counter.text();
-        $.ajax({
-          url: '/tweets/' + id,
-          method: 'POST'
-        }).done(() => {
-          likeCount ++;
-          $counter.text(likeCount);
-        });
-      });
-    });
-  }
-
-  /**
-   * Toggling if the new tweet tab is open or closed
-   */
-  $('.compose').on('click', function (){
-    $('.new-tweet').slideToggle('slow');
-  });
-
   loadTweets();
+
+
 
 });
